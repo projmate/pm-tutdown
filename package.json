@@ -1,0 +1,27 @@
+{
+  "name": "pm-tutdown",
+  "version": "0.0.1",
+  "description": "Projmate Tutdown Filter",
+  "main": "index.js",
+  "dependencies": {
+    "async": "~0.2.8",
+    "highlight.js": "git://github.com/mgutz/highlight.js",
+    "underscore": "~1.4.4",
+    "temp": "~0.5.0",
+    "marked": "git://github.com/mgutz/marked",
+    "handlebars": "~1.0.11",
+    "underscore.string": "~2.3.1",
+    "dox": "~0.4.4",
+    "coffee-script": "~1.6.3",
+    "js-beautify": "~1.4.0",
+    "funcd": "~0.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "",
+  "license": "BSD",
+  "readmeFilename": "README.md"
+}

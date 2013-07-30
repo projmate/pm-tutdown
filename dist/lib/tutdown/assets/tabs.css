@@ -1,0 +1,68 @@
+/* line 5, /home/coder/Projects/pm-tutdown/src/lib/tutdown/assets/tabs.less */
+.tabs,
+.tabs_content {
+  border-bottom: 1px solid #cccccc;
+}
+/* line 8, /home/coder/Projects/pm-tutdown/src/lib/tutdown/assets/tabs.less */
+.tabs ul {
+  list-style: none;
+  padding: 0 0 10px 0;
+  margin: 0;
+  font-size: 0.75em;
+  text-align: center;
+}
+/* line 16, /home/coder/Projects/pm-tutdown/src/lib/tutdown/assets/tabs.less */
+.tabs ul li {
+  display: inline;
+  margin-left: -1px;
+}
+/* line 20, /home/coder/Projects/pm-tutdown/src/lib/tutdown/assets/tabs.less */
+.tabs ul li a {
+  border: 1px solid #cccccc;
+  padding: 10px 25px 10px;
+  text-decoration: none;
+  background-color: #ffffff;
+  border-bottom: none;
+  outline: none;
+  color: #333333;
+}
+/* line 29, /home/coder/Projects/pm-tutdown/src/lib/tutdown/assets/tabs.less */
+.tabs ul li a:hover {
+  color: #111111;
+}
+/* line 32, /home/coder/Projects/pm-tutdown/src/lib/tutdown/assets/tabs.less */
+.tabs ul li.active a {
+  border-bottom: none;
+  color: #111111;
+  padding-bottom: 11px;
+  font-weight: bold;
+}
+/* line 38, /home/coder/Projects/pm-tutdown/src/lib/tutdown/assets/tabs.less */
+.tabs ul li.active a:hover {
+  color: #111111;
+  font-weight: bold;
+}
+/* line 43, /home/coder/Projects/pm-tutdown/src/lib/tutdown/assets/tabs.less */
+.tabs ul li a.icon {
+  background-image: url('products.png');
+  background-position: 13px 9px;
+  background-repeat: no-repeat;
+  padding-left: 36px;
+}
+/* line 49, /home/coder/Projects/pm-tutdown/src/lib/tutdown/assets/tabs.less */
+.tabs_content {
+  border-top: none;
+  padding: 10px 0;
+}
+/* line 57, /home/coder/Projects/pm-tutdown/src/lib/tutdown/assets/tabs.less */
+.tab_content:nth-child(n+2) {
+  display: none;
+}
+/*
+Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
+*/
+/* line 66, /home/coder/Projects/pm-tutdown/src/lib/tutdown/assets/tabs.less */
+.tab_content pre code {
+  background-color: inherit;
+  border: none;
+}

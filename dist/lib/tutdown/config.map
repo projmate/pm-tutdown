@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "config.js",
+  "sourceRoot": "",
+  "sources": [
+    "../../../src/lib/tutdown/config.coffee"
+  ],
+  "names": [],
+  "mappings": "AAuDM"
+}
