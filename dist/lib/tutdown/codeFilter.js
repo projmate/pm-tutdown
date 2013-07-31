@@ -167,7 +167,6 @@ filters.xml = filters.html;
 
 generic = function(lang, source, options, cb) {
   console.error("generic lang", lang);
-  console.error("HJS", hjs);
   return setImmediate(function() {
     var highlighted;
     highlighted = hjs.highlight(lang, source).value;
@@ -188,7 +187,11 @@ filter = function(source, options, cb) {
       return filter(source, options);
     }
   } else {
-    return generic(options.language, source, options, cb);
+    if (options.language) {
+      return generic(options.language, source, options, cb);
+    } else {
+      return cb();
+    }
   }
 };
 

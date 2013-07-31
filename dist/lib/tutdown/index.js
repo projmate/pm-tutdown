@@ -1,4 +1,4 @@
-var DefaultRenderer, Doxdown, Fs, Path, between, langMarkers, removeLangMarkers, updatePartials;
+var DefaultRenderer, Doxdown, Fs, Path, Str, between, langMarkers, removeLangMarkers, updatePartials;
 
 DefaultRenderer = require("./defaultRenderer");
 
@@ -7,6 +7,8 @@ Doxdown = require("./doxdown");
 Path = require("path");
 
 Fs = require("fs");
+
+Str = require('underscore.string');
 
 between = function(s, startToken, endToken) {
   var endPos, start, startPos;
@@ -33,16 +35,8 @@ removeLangMarkers = function(s) {
 };
 
 updatePartials = function(assets, markdown, root) {
-  if (markdown.indexOf(':::>') >= 0) {
-    markdown = markdown.replace(/:::>(.*)/g, function(found) {
-      var file;
-      file = Path.resolve(Path.join(root, found.substring(4).trim()));
-      if (Fs.existsSync(file)) {
-        return Fs.readFileSync(file, 'utf8');
-      } else {
-        return found;
-      }
-    });
+  if (markdown.indexOf(':::#') >= 0) {
+    markdown = markdown.replace(/\s*:::#.*/g, '');
   }
   if (markdown.indexOf(':::<') >= 0) {
     markdown = markdown.replace(/:::< (.*)/g, function(found) {
@@ -103,7 +97,8 @@ updatePartials = function(assets, markdown, root) {
           if (block) {
             _ref = langMarkers[lang], leftMarker = _ref[0], rightMarker = _ref[1];
             if (text.indexOf(leftMarker + block) >= 0) {
-              text = between(text, leftMarker + block, rightMarker).trim();
+              text = between(text, leftMarker + block, rightMarker);
+              text = Str.trim(text, '\r\n');
             }
           }
           result = "";

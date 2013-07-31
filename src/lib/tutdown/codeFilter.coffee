@@ -127,7 +127,6 @@ filters.xml = filters.html
 
 generic = (lang, source, options, cb) ->
   console.error "generic lang", lang
-  console.error "HJS", hjs
   setImmediate ->
     highlighted = hjs.highlight(lang, source).value
     if cb
@@ -145,6 +144,10 @@ filter = (source, options, cb) ->
     else
         filter source, options
   else
-    generic options.language, source, options, cb
+    if options.language
+      generic options.language, source, options, cb
+    else
+      cb()
+
 
 module.exports = filter

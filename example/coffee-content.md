@@ -23,8 +23,11 @@ Let's update sidebar DIV
 
 :::< examples/coffee.coffee --block sidebar --no-capture
 
+
+:::# Show the script to user
 :::< examples/coffee.coffee --as-tab script.coffee --clean
 
+:::# Include the compiled script
 :::< ../tmp/examples/coffee.js --hide
 
 :::END
