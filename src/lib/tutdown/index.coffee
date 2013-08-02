@@ -47,7 +47,15 @@ updatePartials = (assets, markdown, root) ->
           when '--raw' then raw = true
           when '--hide' then hide = true
           when '--clean' then clean = true
-          else continue
+          when '--as-asset'
+            clean = true
+            noCapture = true
+            assetName = Path.basename(args[i+1])
+          else
+            if arg.indexOf('--') is 0
+              throw new Error("Unrecognized :::< option: #{arg}")
+            else
+              continue
 
       if !lang
         lang = Path.extname(filename)
@@ -67,6 +75,9 @@ updatePartials = (assets, markdown, root) ->
 
         if clean
           text = removeLangMarkers(text)
+
+        if assetName
+          assets[assetName] = text
 
         if tabName
           assets[tabName] = text
@@ -91,12 +102,23 @@ updatePartials = (assets, markdown, root) ->
           if argv.length > 0
             result += ":::@ #{argv.join(' ')}\n\n"
 
-          result +=
-            """
-            ```#{lang}
-            #{text}
-            ```
-            """
+          if assetName
+            result +=
+             """
+              :::@ --hide
+
+              ```html
+              <script src='#{assetName}'></script>
+              ```
+              """
+
+          else
+            result +=
+              """
+              ```#{lang}
+              #{text}
+              ```
+              """
           return result
       else
         found

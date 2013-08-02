@@ -40,7 +40,7 @@ updatePartials = function(assets, markdown, root) {
   }
   if (markdown.indexOf(':::<') >= 0) {
     markdown = markdown.replace(/:::< (.*)/g, function(found) {
-      var arg, args, argv, block, clean, file, filename, hide, i, lang, leftMarker, noCapture, raw, result, rightMarker, tabName, text, _i, _len, _ref;
+      var arg, args, argv, assetName, block, clean, file, filename, hide, i, lang, leftMarker, noCapture, raw, result, rightMarker, tabName, text, _i, _len, _ref;
       args = found.substring(4).trim().split(' ');
       filename = args[0];
       noCapture = false;
@@ -68,8 +68,17 @@ updatePartials = function(assets, markdown, root) {
           case '--clean':
             clean = true;
             break;
+          case '--as-asset':
+            clean = true;
+            noCapture = true;
+            assetName = Path.basename(args[i + 1]);
+            break;
           default:
-            continue;
+            if (arg.indexOf('--') === 0) {
+              throw new Error("Unrecognized :::< option: " + arg);
+            } else {
+              continue;
+            }
         }
       }
       if (!lang) {
@@ -89,6 +98,9 @@ updatePartials = function(assets, markdown, root) {
         }
         if (clean) {
           text = removeLangMarkers(text);
+        }
+        if (assetName) {
+          assets[assetName] = text;
         }
         if (tabName) {
           assets[tabName] = text;
@@ -112,7 +124,11 @@ updatePartials = function(assets, markdown, root) {
           if (argv.length > 0) {
             result += ":::@ " + (argv.join(' ')) + "\n\n";
           }
-          result += "```" + lang + "\n" + text + "\n```";
+          if (assetName) {
+            result += ":::@ --hide\n\n```html\n<script src='" + assetName + "'></script>\n```";
+          } else {
+            result += "```" + lang + "\n" + text + "\n```";
+          }
           return result;
         }
       } else {
