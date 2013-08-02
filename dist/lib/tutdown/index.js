@@ -40,9 +40,12 @@ updatePartials = function(assets, markdown, root) {
   }
   if (markdown.indexOf(':::<') >= 0) {
     markdown = markdown.replace(/:::< (.*)/g, function(found) {
-      var arg, args, argv, assetName, block, clean, file, filename, hide, i, lang, leftMarker, noCapture, raw, result, rightMarker, tabName, text, _i, _len, _ref;
+      var arg, args, argv, assetName, block, clean, file, filename, hide, i, lang, leftMarker, noCapture, raw, result, rightMarker, tabName, text, _i, _len, _ref, _ref1;
       args = found.substring(4).trim().split(' ');
       filename = args[0];
+      if (filename.indexOf('#')) {
+        _ref = filename.split('#'), filename = _ref[0], block = _ref[1];
+      }
       noCapture = false;
       for (i = _i = 0, _len = args.length; _i < _len; i = ++_i) {
         arg = args[i];
@@ -107,7 +110,7 @@ updatePartials = function(assets, markdown, root) {
           return "";
         } else {
           if (block) {
-            _ref = langMarkers[lang], leftMarker = _ref[0], rightMarker = _ref[1];
+            _ref1 = langMarkers[lang], leftMarker = _ref1[0], rightMarker = _ref1[1];
             if (text.indexOf(leftMarker + block) >= 0) {
               text = between(text, leftMarker + block, rightMarker);
               text = Str.trim(text, '\r\n');

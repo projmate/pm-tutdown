@@ -37,6 +37,11 @@ updatePartials = (assets, markdown, root) ->
     markdown = markdown.replace /:::< (.*)/g, (found) ->
       args = found.substring(4).trim().split(' ')
       filename = args[0]
+
+      # "examples/script.js#main" => filename=examples-script.js block=main
+      if filename.indexOf('#')
+        [filename, block] = filename.split('#')
+
       noCapture = false
       for arg, i in args
         switch arg
